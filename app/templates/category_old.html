@@ -1,0 +1,513 @@
+{% extends "base.html" %}
+
+{% block title %}Category{% endblock %}
+
+{% block content %}
+<!-- Hero Area Start -->
+<div id="hero-area">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="contents-ctg">
+                    <div class="search-bar">
+                        <fieldset>
+                            <form class="search-form">
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-tag"></i>
+                                    <input type="text" name="customword" class="form-control"
+                                        placeholder="What are you looking for">
+                                </div>
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-map-marker"></i>
+                                    <div class="tg-select">
+                                        <select name="country">
+                                            <option value="None">Select Country</option>
+                                            <option value="austria">Austria</option>
+                                            <option value="france">France</option>
+                                            <option value="germany">Germany</option>
+                                            <option value="italy">Italy</option>
+                                            <option value="spain">Spain</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-layers"></i>
+                                    <div class="tg-select">
+                                        <select>
+                                            <option value="none">Select Categories</option>
+                                            <option value="mobiles">Mobiles</option>
+                                            <option value="electronics">Electronics</option>
+                                            <option value="real estate">Real Estate</option>
+                                            <option value="vehicles">Vehicles</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-common" type="button"><i class="lni lni-search"></i></button>
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+</header>
+<!-- Header Area wrapper End -->
+
+<!-- Main container Start -->
+<div class="main-container section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12 col-xs-12 page-sidebar">
+                <aside>
+                    <!-- Searcg Widget -->
+                    <div class="widget widget_search">
+                        <form role="search" id="search-form">
+                            <input type="search" class="form-control" autocomplete="off" name="s"
+                                placeholder="Search..." id="search-input" value="">
+                            <button type="submit" id="search-submit" class="search-btn"><i
+                                    class="lni lni-search"></i></button>
+                        </form>
+                    </div>
+                    <!-- Categories Widget -->
+                    <div class="widget categories">
+                        <h4 class="widget-title">All Categories</h4>
+                        <ul class="categories-list">
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-dinner"></i>
+                                    Hotel & Travels <span class="category-counter">(5)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-control-panel"></i>
+                                    Services <span class="category-counter">(8)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-github"></i>
+                                    Pets <span class="category-counter">(2)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-coffee-cup"></i>
+                                    Restaurants <span class="category-counter">(3)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-home"></i>
+                                    Real Estate <span class="category-counter">(4)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-pencil"></i>
+                                    Jobs <span class="category-counter">(5)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="lni lni-display"></i>
+                                    Electronics <span class="category-counter">(9)</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <h4 class="widget-title">Advertisement</h4>
+                        <div class="add-box">
+                            <img class="img-fluid" src="/assets/img/img1.jpg" alt="">
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-lg-9 col-md-12 col-xs-12 page-content">
+                <!-- Product filter Start -->
+                <div class="product-filter">
+                    <div class="short-name">
+                        <span>Showing (1 - 12 products of 7371 products)</span>
+                    </div>
+                    <div class="Show-item">
+                        <span>Show Items</span>
+                        <form class="woocommerce-ordering" method="post">
+                            <label>
+                                <select name="order" class="orderby">
+                                    <option selected="selected" value="menu-order">49 items</option>
+                                    <option value="popularity">popularity</option>
+                                    <option value="popularity">Average ration</option>
+                                    <option value="popularity">newness</option>
+                                    <option value="popularity">price</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#grid-view"><i class="lni lni-grid"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#list-view"><i
+                                    class="lni lni-list"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Product filter End -->
+
+                <!-- Adds wrapper Start -->
+                <div class="adds-wrapper">
+                    <div class="tab-content">
+                        <div id="grid-view" class="tab-pane fade">
+                            <div class="row">
+                                <!-- First-->
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img1.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Mobiles > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Apple iPhone X</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i> Mobile</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Second-->
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img2.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Loptop > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Brand New Macbook Pro</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i> Loptop</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Third-->
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img-11.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Electronics > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Canon Photography Camera</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i> Electronics</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fourth-->
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img4.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Photography > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Photography Services In USA</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i>Photography</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="list-view" class="tab-pane fade active show">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img1.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Mobiles > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Apple iPhone X</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i> Mobile</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img2.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Laptop > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Brand New Macbook Pro</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i> Laptop</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img-11.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Electronics > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Canon Photography Camera</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i> Electronics</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="#"><img class="img-fluid" src="/assets/img/featured/img-11.jpg"
+                                                    alt=""></a>
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">Photography > Accessories</a>
+                                            </div>
+                                            <h4><a href="ads-details">Photography Services In USA</a></h4>
+                                            <span>Last Updated: 4 hours ago</span>
+                                            <ul class="address">
+                                                <li>
+                                                    <a href="#"><i class="lni lni-map-marker"></i>New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-alarm-clock"></i> 7 Jan, 10:10 pm</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-user"></i> John Smith</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="lni lni-tag"></i>Photography</a>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ 25</a>
+                                                <a class="btn btn-common" href="ads-details">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adds wrapper End -->
+
+                <!-- Start Pagination -->
+                <div class="pagination-bar">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- End Pagination -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main container End -->
+
+
+{% endblock %}

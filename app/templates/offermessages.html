@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Messages{% endblock %}
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header" style="background: url(/assets/img/banner1.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-wrapper">
+                    <h2 class="product-title">Messages</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home /</a></li>
+                        <li class="current">Messages</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Start Content -->
+<div id="content" class="section-padding">
+    <div class="container">
+        <div class="row">
+            {% include "account_sidebar.html" %}
+
+            <div class="col-sm-12 col-md-8 col-lg-9">
+                <div class="page-content">
+                    <div class="inner-box">
+                        <div class="dashboard-box">
+                            <h2 class="dashbord-title">Messages</h2>
+                        </div>
+                        <div class="dashboard-wrapper">
+                            <!-- Conversations List -->
+                            <div class="conversations-list">
+                                <h4>Your Conversations</h4>
+                                <ul class="list-group">
+                                    {% for conversation in conversations %}
+                                    <li class="list-group-item">
+                                        <a href="{{ url_for('view_conversation', conversation_id=conversation.id) }}">
+                                            Conversation with
+                                            {% if conversation.user1_id == user.id %}
+                                            {{ conversation.user2.username }}
+                                            {% else %}
+                                            {{ conversation.user1.username }}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <!-- Message Section -->
+                            <div class="messages-section">
+                                <h4>Messages</h4>
+                                <div id="messageContainer" class="message-list">
+                                    {% for message in messages %}
+                                    <div
+                                        class="message {% if message.sender_id == user.id %}sent{% else %}received{% endif %}">
+                                        <p>{{ message.content }}</p>
+                                        <span class="timestamp">{{ message.created_at.strftime('%H:%M %p, %d %b')
+                                            }}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Message Form -->
+                                <form action="{{ url_for('send_message', conversation_id=conversation.id) }}"
+                                    method="post" class="send-message-form mt-3">
+                                    <div class="form-group">
+                                        <textarea name="content" class="form-control"
+                                            placeholder="Write your message..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+{% block extra_js %}
+<script>
+    function openChat(user) {
+        document.getElementById("chatWith").innerText = user;
+        document.getElementById("messageContainer").innerHTML = ""; // Aquí cargarías los mensajes del usuario desde el backend
+    }
+
+    function sendMessage() {
+        const message = document.getElementById("inputMessage").value;
+        if (message.trim()) {
+            const messageContainer = document.getElementById("messageContainer");
+            // Crear y agregar un nuevo mensaje en la vistae
+            const newMessage = document.createElement("div");
+            newMessage.className = "message text-only";
+            newMessage.innerHTML = `<div class="response"><p class="text">${message}</p></div>`;
+            messageContainer.appendChild(newMessage);
+            document.getElementById("inputMessage").value = ""; // Limpiar el campo de entrada
+        }
+    }
+</script>
+{% endblock %}
+{% endblock %}

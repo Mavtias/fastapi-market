@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Post Ad{% endblock %}
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header" style="background: url(/assets/img/banner1.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-wrapper">
+                    <h2 class="product-title">Post you Ads</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home /</a></li>
+                        <li class="current">Post you Ads</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Start Content -->
+<div id="content" class="section-padding">
+    <div class="container">
+        <div class="row">
+            {% include "account_sidebar.html" %}
+            <!-- Post an ads start -->
+            <div class="col-sm-12 col-md-8 col-lg-9">
+                <div class="row page-content">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                        <div class="inner-box">
+                            <div class="dashboard-box">
+                                <h2 class="dashbord-title">Ad Detail</h2>
+                            </div>
+                            <div class="dashboard-wrapper">
+                                <form class="post-ad-form" action="/ad/post-ad" method="POST"
+                                    enctype="multipart/form-data">
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Product name</label>
+                                        <input class="form-control input-md" name="title" placeholder="Title"
+                                            type="text" maxlength="30" required>
+                                    </div>
+                                    <div class="form-group mb-3 tg-inputwithicon">
+                                        <label class="control-label">Categories</label>
+                                        <div class="tg-select form-control">
+                                            <select name="category" required>
+                                                <option value="">Select Categories</option>
+                                                <option value="mobiles">Mobiles</option>
+                                                <option value="electronics">Electronics</option>
+                                                <option value="real estate">Real Estate</option>
+                                                <option value="vehicles">Vehicles</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Price</label>
+                                        <input class="form-control input-md" name="price" placeholder="Ad your Price"
+                                            type="text" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="description">Ad Details</label>
+                                        <textarea class="form-control" id="description" name="description" rows="5"
+                                            placeholder="Enter Ad Details" required></textarea>
+                                    </div>
+                                    <div id="image-upload-section">
+                                        <label class="tg-fileuploadlabel" for="tg-photogallery" id="upload-label">
+                                            <span id="upload-text">Drop files anywhere to upload</span>
+                                            <span id="or-text">Or</span>
+                                            <span class="btn btn-common" id="select-btn">Select Files</span>
+                                            <span>Maximum upload file size: 500 KB</span>
+                                            <input id="tg-photogallery" class="tg-fileinput" type="file" name="files"
+                                                multiple onchange="previewImages(event)">
+                                        </label>
+                                        <div id="image-previews" style="margin-top: 10px; display: none;">
+                                            <img id="preview" src="" alt="Image Preview"
+                                                style="max-width: 40%; display: block;">
+
+                                        </div>
+                                        <button class="btn btn-common" id="change-btn"
+                                            onclick="changeImages(event)">Change
+                                            Image </button>
+                                    </div>
+                            </div>
+
+                        </div>
+                        <div class="tg-checkbox">
+                            <input id="tg-agreetermsandrules" type="checkbox" name="agreetermsandrules" value="on">
+                            <label for="tg-agreetermsandrules">I agree to all <a href="javascript:void(0);">Terms of Use
+                                    &amp; Posting Rules</a></label>
+
+                        </div>
+                        <button class="btn btn-common" type="submit">Post Ad</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+{% endblock %}
+<!-- End Content -->
+{% block extra_js %}
+<!-- <script src="{{ url_for('assets', path='js/login.js') }}"></script> -->
+<!-- <script src="{{ url_for('assets', path='js/auth.js') }}"></script> -->
+
+<script>
+    function previewImages(event) {
+        const fileInput = event.target;
+        const previewsContainer = document.getElementById('image-previews');
+        const labelSection = document.getElementById('upload-label');
+        const changeBtn = document.getElementById('change-btn');
+
+        // Limpiar cualquier vista previa anterior
+        previewsContainer.innerHTML = '';
+
+        // Verificar si hay archivos seleccionados
+        if (fileInput.files && fileInput.files.length > 0) {
+            // Mostrar el contenedor de vistas previas
+            previewsContainer.style.display = 'block';
+
+            Array.from(fileInput.files).forEach(file => {
+                const reader = new FileReader();
+
+                // Crear un nuevo elemento de imagen para cada archivo
+                const imgElement = document.createElement('img');
+                imgElement.style.maxWidth = '100%';
+                imgElement.style.marginTop = '10px';
+                imgElement.style.maxHeight = '200px'; // Limitar la altura para que no sea demasiado grande
+                imgElement.style.marginRight = '10px'; // Espacio entre imágenes
+
+                reader.onload = function (e) {
+                    imgElement.src = e.target.result;
+                };
+
+                // Leer el archivo seleccionado como una URL de datos
+                reader.readAsDataURL(file);
+
+                // Añadir la imagen al contenedor de vistas previas
+                previewsContainer.appendChild(imgElement);
+            });
+
+            // Ocultar la sección de subida de imágenes y mostrar el botón de cambio
+            labelSection.style.display = 'none';
+            changeBtn.style.display = 'inline-block';
+        }
+    }
+
+    function changeImages(event) {
+        event.preventDefault();  // Evita que el formulario se envíe
+
+        const fileInput = document.getElementById('tg-photogallery');
+        const labelSection = document.getElementById('upload-label');
+        const changeBtn = document.getElementById('change-btn');
+        const previewsContainer = document.getElementById('image-previews');
+
+        // Volver a mostrar el input para seleccionar nuevas imágenes
+        labelSection.style.display = 'block';
+        changeBtn.style.display = 'none';
+
+        // Limpiar las vistas previas de imágenes
+        previewsContainer.innerHTML = '';
+        previewsContainer.style.display = 'none';
+
+        // Resetear el input para que pueda aceptar nuevas imágenes
+        fileInput.value = ''; // Esto es importante para limpiar la selección actual
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<!-- Page Header Start -->
+<div class="page-header" style="background: url(/assets/img/banner1.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-wrapper">
+                    <h2 class="product-title">Join Us</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home /</a></li>
+                        <li class="current">Register</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Content section Start -->
+<section class="register section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-12 col-xs-12">
+                <div class="register-form login-area">
+                    <h3>
+                        Register
+                    </h3>
+                    <form class="login-form" action="/users/signup" method="POST">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="lni lni-user"></i>
+                                <input type="" text id="firstname" class="form-control" name="firstname"
+                                    placeholder="First Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="lni lni-user"></i>
+                                <input type="" text id="lastname" class="form-control" name="lastname"
+                                    placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="lni lni-map-marker"></i>
+                                <select name="country" class="form-control">
+                                    <option value="None"> &nbsp;&nbsp;&nbsp;&nbsp;Select Country</option>
+                                    <option value="Austria">&nbsp;&nbsp;&nbsp;&nbsp;Austria</option>
+                                    <option value="France">&nbsp;&nbsp;&nbsp;&nbsp;France</option>
+                                    <option value="Germany">&nbsp;&nbsp;&nbsp;&nbsp;Germany</option>
+                                    <option value="Italy">&nbsp;&nbsp;&nbsp;&nbsp;Italy</option>
+                                    <option value="Spain">&nbsp;&nbsp;&nbsp;&nbsp;Spain</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="lni lni-user"></i>
+                                <input type="text" id="email" class="form-control" name="email" placeholder="Email"
+                                    autocomplete="off" spellcheck="false" inputmode="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="lni lni-lock"></i>
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="lni lni-lock"></i>
+                                <input type="password" class="form-control" name="password_confirm"
+                                    placeholder="Retype Password" required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="checkbox">
+                                <input type="checkbox" name="rememberme" value="rememberme">
+                                <label>By registering, you accept our Terms & Conditions</label>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-common log-btn">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    const form = document.querySelector('.login-form');
+    form.addEventListener('submit', function (event) {
+        const password = form.querySelector('input[name="password"]').value;
+        const passwordConfirm = form.querySelector('input[name="password_confirm"]').value;
+
+        if (password !== passwordConfirm) {
+            event.preventDefault();  // Evitar que el formulario se envíe
+            alert("Passwords do not match!");
+        }
+    });
+</script>
+<!-- Content section End -->
+{% endblock %}

@@ -1,0 +1,40 @@
+<div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+    <aside>
+        <div class="sidebar-box">
+            <div class="user">
+                <div class="usercontent">
+                    <h3>Welcome</h3>
+                    <h4>{{ user.firstname }}</h4>
+                </div>
+            </div>
+            <nav class="navdashboard">
+                <ul>
+                    <li>
+                        <a href="{{ url_for('dashboard') }}">
+                            <i class="lni lni-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="{{ url_for('account_profile_setting') }}">
+                            <i class="lni lni-cog"></i>
+                            <span>Profile Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('offermessages') }}">
+                            <i class="lni lni-envelope"></i>
+                            <span>Offers/Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('account_favourite_ads') }}">
+                            <i class="lni lni-heart"></i>
+                            <span>My Favourites</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+</div>

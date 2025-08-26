@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+
+{% block title %}Category{% endblock %}
+
+{% block content %}
+<!-- Hero Area Start -->
+<div id="hero-area">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="contents-ctg">
+                    <div class="search-bar">
+                        <fieldset>
+                            <!-- Cambiamos method a GET para enviar los parámetros al servidor -->
+                            <form class="search-form" method="GET" action="/ad/category">
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-tag"></i>
+                                    <!-- Mantener el valor buscado si ya se ha hecho una búsqueda -->
+                                    <input type="text" name="search_query" class="form-control"
+                                        placeholder="What are you looking for" value="{{ search_query or '' }}">
+                                </div>
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-map-marker"></i>
+                                    <div class="tg-select">
+                                        <select name="country">
+                                            <option value="">Select Country</option>
+                                            <option value="austria" {% if country=="austria" %}selected{% endif %}>
+                                                Austria</option>
+                                            <option value="france" {% if country=="france" %}selected{% endif %}>France
+                                            </option>
+                                            <option value="germany" {% if country=="germany" %}selected{% endif %}>
+                                                Germany</option>
+                                            <option value="italy" {% if country=="italy" %}selected{% endif %}>Italy
+                                            </option>
+                                            <option value="spain" {% if country=="spain" %}selected{% endif %}>Spain
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-layers"></i>
+                                    <div class="tg-select">
+                                        <select name="category">
+                                            <option value="">Select Categories</option>
+                                            <option value="mobiles" {% if selected_category=="mobiles" %}selected{%
+                                                endif %}>Mobiles</option>
+                                            <option value="electronics" {% if selected_category=="electronics"
+                                                %}selected{% endif %}>Electronics</option>
+                                            <option value="real estate" {% if selected_category=="real estate"
+                                                %}selected{% endif %}>Real Estate</option>
+                                            <option value="vehicles" {% if selected_category=="vehicles" %}selected{%
+                                                endif %}>Vehicles</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- El botón de búsqueda ahora usa el tipo "submit" para que envíe el formulario -->
+                                <button class="btn btn-common" type="submit"><i class="lni lni-search"></i></button>
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+</header>
+<!-- Header Area wrapper End -->
+<!-- Main container Start -->
+<div class="main-container section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12 col-xs-12 page-sidebar">
+                <aside>
+                    <!-- Search Widget -->
+                    <div class="widget widget_search">
+                        <form role="search" id="search-form" action="" method="get">
+                            <input type="search" class="form-control" autocomplete="off" name="search_query"
+                                placeholder="Search..." id="search-input"
+                                value="{{ search_query if search_query is not none else ''}}">
+                            <button type="submit" id="search-submit" class="search-btn"><i
+                                    class="lni lni-search"></i></button>
+                        </form>
+                    </div>
+                    <!-- Categories Widget -->
+                    <div class="widget categories">
+                        <h4 class="widget-title">All Categories</h4>
+                        <ul class="categories-list">
+                            <!-- Show all the products -->
+                            <li>
+                                <a href="?search_query={{ search_query if search_query else '' }}">
+                                    <i class="lni lni-list"></i>
+                                    Show All Products <span class="category-counter">({{ products | length }})</span>
+
+                                </a>
+                            </li>
+                            {% for category_name, count in category_counts.items() %}
+                            <li>
+                                <a
+                                    href="?category={{ category_name | lower }}&search_query={{ search_query if search_query else '' }}">
+                                    <i class="lni lni-list {{ category_name | lower }}"></i>
+                                    {{ category_name | title }} <span class="category-counter">({{ count }})</span>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="col-lg-9 col-md-12 col-xs-12 page-content">
+                <!-- Product filter Start -->
+                <div class="product-filter">
+                    <div class="short-name">
+                        <span>Showing ({{ products | length }} products)</span>
+                    </div>
+                    <div class="Show-item">
+                        <span>Show Items</span>
+                        <form class="woocommerce-ordering" method="post">
+                            <label>
+                                <select name="order" class="orderby">
+                                    <option selected="selected" value="menu-order">10 items</option>
+                                    <option value="popularity">popularity</option>
+                                    <option value="popularity">Average ration</option>
+                                    <option value="popularity">newness</option>
+                                    <option value="popularity">price</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#grid-view"><i class="lni lni-grid"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#list-view"><i
+                                    class="lni lni-list"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Product filter End -->
+
+                <!-- Adds wrapper Start -->
+                <div class="adds-wrapper">
+                    <div class="tab-content">
+                        <!-- Grid view -->
+                        <div id="grid-view" class="tab-pane fade">
+                            <div class="row">
+                                {% for product in products %}
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="{{ url_for('ads_details', product_id=product.id) }}">
+                                                <img class="img-fluid" src="{{ product.image_url.split(',')[0] }}"
+                                                    alt="{{ product.title }}">
+                                            </a>
+                                            <!-- <a href="{{ url_for('ads_details', product_id=product.id) }}">
+                                                <img class="img-fluid" src="{{ product.image_url }}"
+                                                    alt="{{ product.title }}">
+                                            </a> -->
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">{{ product.category }}</a>
+                                            </div>
+                                            <h4><a href="{{ url_for('ads_details', product_id=product.id) }}">{{
+                                                    product.title }}</a></h4>
+                                            <span>Last Updated: {{ product.created_at.strftime('%d %b, %I:%M %p')
+                                                }}</span>
+                                            <ul class="address">
+                                                <li><a href="#"><i class="lni lni-map-marker"></i>{{ product.owner.city
+                                                        }}, {{ product.owner.country }}</a></li>
+                                                <li><a href="#"><i class="lni lni-alarm-clock"></i>{{
+                                                        product.created_at.strftime('%d %b, %I:%M %p') }}</a></li>
+                                                <li><a href="#"><i class="lni lni-user"></i>{{ product.owner.firstname
+                                                        }} {{ product.owner.lastname }}</a></li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">{{ product.price }}</a>
+                                                <a class="btn btn-common"
+                                                    href="{{ url_for('ads_details', product_id=product.id) }}">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- List view -->
+                        <div id="list-view" class="tab-pane fade active show">
+                            <div class="row">
+                                {% for product in products %}
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="featured-box">
+                                        <figure>
+                                            <div class="icon">
+                                                <i class="lni lni-heart"></i>
+                                            </div>
+                                            <a href="{{ url_for('ads_details', product_id=product.id) }}">
+                                                <img class="img-fluid" src="{{ product.image_url.split(',')[0] }}"
+                                                    alt="{{ product.title }}">
+                                            </a>
+                                            <!-- <a href="{{ url_for('ads_details', product_id=product.id) }}">
+                                                <img class="img-fluid" src="{{ product.image_url }}"
+                                                    alt="{{ product.title }}">
+                                            </a> -->
+                                        </figure>
+                                        <div class="feature-content">
+                                            <div class="tg-product">
+                                                <a href="#">{{ product.category }}</a>
+                                            </div>
+                                            <h4><a href="{{ url_for('ads_details', product_id=product.id) }}">{{
+                                                    product.title }}</a></h4>
+                                            <span>Last Updated: {{ product.created_at.strftime('%d %b, %I:%M %p')
+                                                }}</span>
+                                            <ul class="address">
+                                                <li><a href="#"><i class="lni lni-map-marker"></i>{{ product.owner.city
+                                                        }}, {{ product.owner.country }}</a></li>
+                                                <li><a href="#"><i class="lni lni-alarm-clock"></i>{{
+                                                        product.created_at.strftime('%d %b, %I:%M %p') }}</a></li>
+                                                <li><a href="#"><i class="lni lni-user"></i>{{ product.owner.firstname
+                                                        }} {{ product.owner.lastname }}</a></li>
+                                            </ul>
+                                            <div class="btn-list">
+                                                <a class="btn-price" href="#">$ {{ product.price }}</a>
+                                                <a class="btn btn-common"
+                                                    href="{{ url_for('ads_details', product_id=product.id) }}">
+                                                    <i class="lni lni-list"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adds wrapper End -->
+            </div>
+
+            <!-- Start Pagination -->
+            <div class="pagination-bar">
+                <nav>
+                    <ul class="pagination">
+                        {% if page > 1 %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?category={{ selected_category if selected_category else '' }}&search_query={{ search_query if search_query else '' }}&country={{ country if country else ''}}&page={{ page - 1 }}">Previous</a>
+                        </li>
+                        {% endif %}
+
+                        {% for p in range(1, total_pages + 1) %}
+                        <li class="page-item {% if p == page %}active{% endif %}">
+                            <a class="page-link"
+                                href="?category={{ selected_category if selected_category else '' }}&search_query={{ search_query if search_query else '' }}&country={{ country if country else '' }}&page={{ p }}">{{
+                                p }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if page < total_pages %} <li class="page-item">
+                            <a class="page-link"
+                                href="?category={{ selected_category if selected_category else ''}}&search_query={{ search_query if search_query else '' }}&country={{ country if country else '' }}&page={{ page + 1 }}">Next</a>
+                            </li>
+                            {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- End Pagination -->
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- Main container End -->
+
+
+{% endblock %}

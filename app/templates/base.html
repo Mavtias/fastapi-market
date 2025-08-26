@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Site Title{% endblock %}</title>
+    <!-- Favicon clásico -->
+    <link rel="icon" href="{{ url_for('assets', path='img/favicons/favicon.ico') }}" type="image/x-icon">
+
+    <!-- Iconos de diferentes tamaños para navegadores -->
+    <link rel="icon" href="{{ url_for('assets', path='img/favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="icon" href="{{ url_for('assets', path='img/favicons/favicon-32x32.png') }}" sizes="32x32">
+
+    <!-- Icono para Android Chrome -->
+    <link rel="icon" href="{{ url_for('assets', path='img/favicons/android-chrome-192x192.png') }}" sizes="192x192">
+    <link rel="icon" href="{{ url_for('assets', path='img/favicons/android-chrome-512x512.png') }}" sizes="512x512">
+
+    <!-- Icono para dispositivos Apple -->
+    <link rel="apple-touch-icon" href="{{ url_for('assets', path='img/favicons/apple-touch-icon.png') }}">
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/bootstrap.min.css') }}">
+    <!-- Icon -->
+    <link rel="stylesheet" href="{{ url_for('assets', path='fonts/lineicons.css') }}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/slicknav.css') }}">
+    <!-- Nivo Lightbox-->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/nivo-lightbox.css') }}">
+    <!-- Animate-->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/animate.css') }}">
+    <!-- Owl Carousel-->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/owl.carousel.css') }}">
+    <!-- Main Style-->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/main.css') }}">
+    <!-- Responsive Style-->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/responsive.css') }}">
+    <!-- messages Style -->
+    <link rel="stylesheet" href="{{ url_for('assets', path='css/messages.css') }}">
+
+
+    <!-- Block for additional CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- Header Section Start -->
+    <header id="header-wrap">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+                        aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="lni lni-menu"></span>
+                        <span class="lni lni-menu"></span>
+                        <span class="lni lni-menu"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url_for('index') }}"><img
+                            src="{{ url_for('assets', path='img/logo.png') }}" alt="Logo"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('category') }}">Categories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Pages</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ url_for('about') }}">About Us</a>
+                                <a class="dropdown-item" href="{{ url_for('post_ads') }}">Ads Post</a>
+                                <a class="dropdown-item" href="{{ url_for('pricing') }}">Packages</a>
+                                <a class="dropdown-item" href="{{ url_for('faq') }}">FAQ</a>
+                            </div>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="sign-in">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><i class="lni lni-user"></i> My Account</a>
+                            <div class="dropdown-menu">
+                                {% if user %}
+                                <a class="dropdown-item" href="{{ url_for('dashboard') }}"><i class="lni lni-home"></i>
+                                    Account Home</a>
+                                <a class="dropdown-item" href="{{ url_for('account_favourite_ads') }}"><i
+                                        class="lni lni-heart"></i> Favourite ads</a>
+                                <a class="dropdown-item" href="{{ url_for('account_archived_ads') }}"><i
+                                        class="lni lni-folder"></i> Archived</a>
+                                <form id="logout-form" action="{{ url_for('logout') }}" method="POST"
+                                    style="display: none;">
+                                    <input type="hidden" name="logout" value="true">
+                                </form>
+                                <a id="logout-btn" class="dropdown-item" href="#"
+                                    onclick="document.getElementById('logout-form').submit(); return false;">
+                                    <i class="lni lni-close"></i> Log out
+                                </a>
+                                {% else %}
+                                <a class="dropdown-item" href="{{ url_for('login') }}"><i class="lni lni-lock"></i> Log
+                                    In</a>
+                                <a class="dropdown-item" href="{{ url_for('signup') }}"><i class="lni lni-user"></i>
+                                    Sign
+                                    up</a>
+                                <a class="dropdown-item" href="{{ url_for('forgot_password') }}"><i
+                                        class="lni lni-reload"></i> Forgot Password</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                    <a class="tg-btn" href="{{ url_for('post_ads') }}">
+                        <i class="lni lni-pencil-alt"></i> Post An Ad
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Start -->
+            <ul class="mobile-menu">
+                <li>
+                    <a class="active" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('category') }}">Categories</a>
+                </li>
+                <li>
+                    <a href="#">Listings</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('adlistinglist') }}">Ad Listing</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Pages</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('about') }}">About Us</a></li>
+                        <li><a href="{{ url_for('post_ads') }}">Ads Post</a></li>
+                        <li><a href="{{ url_for('pricing') }}">Packages</a></li>
+                        <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ url_for('contact') }}">Contact Us</a>
+                </li>
+                <li>
+                    <a>My Account</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('account_profile_setting') }}"><i class="lni lni-home"></i> Account
+                                Home</a>
+                        </li>
+                        <li><a href="{{ url_for('account_favourite_ads') }}"><i class="lni lni-heart"></i> Favourite
+                                ads</a>
+                        </li>
+                        <li><a href="{{ url_for('account_archived_ads') }}"><i class="lni lni-folder"></i> Archived</a>
+                        </li>
+                        <li><a href="{{ url_for('login') }}"><i class="lni lni-lock"></i> Log In</a></li>
+                        <li><a href="{{ url_for('signup') }}"><i class="lni lni-user"></i> Signup</a></li>
+                        <li><a href="{{ url_for('forgot_password') }}"><i class="lni lni-reload"></i> Forgot
+                                Password</a>
+                        </li>
+                        <li><a href="{{ url_for('account_close') }}"><i class="lni lni-close"></i> Account close</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Mobile Menu End -->
+
+        </nav>
+        <!-- Navbar End -->
+
+        <!-- Hero Area End -->
+
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Main Content Section -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <!-- End Main Content Section -->
+
+    <!-- Footer Section -->
+    <footer>
+        {% block footer %}{% endblock %}
+    </footer>
+    <!-- End Footer Section -->
+
+    <!-- JS Files -->
+    <script src="{{ url_for('assets', path='js/jquery-min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/jquery.counterup.min.js')}}"></script>
+    <script src="{{ url_for('assets', path='js/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/wow.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/nivo-lightbox.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/main.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/form-validator.min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/contact-form-script.min.js') }}"></script>
+    <script src="{{ url_for('assets', path='js/summernote.js') }}"></script>
+    <!-- Log out script -->
+
+    <!-- <script>
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            // Enviar solicitud al backend para eliminar la cookie
+            fetch('/account/logout', {
+                method: 'POST',
+                credentials: 'include', // Esto asegura que se envíe la cookie en la solicitud
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        // Si el backend responde con una redirección, se redirige al usuario
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(error => console.error('Error during logout:', error));
+        });
+    </script> -->
+
+
+    <!-- Block for additional JS -->
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

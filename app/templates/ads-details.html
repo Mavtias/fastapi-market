@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.title }} - Ad Details{% endblock %}
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header" style="background: url(/assets/img/banner1.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-wrapper">
+                    <h2 class="product-title">{{ product.title }}</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home /</a></li>
+                        <li class="current">Ad Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Ads Details Start -->
+<div class="section-padding">
+    <div class="container">
+        <!-- Product Info Start -->
+        <div class="product-info row">
+            <div class="col-lg-7 col-md-12 col-xs-12">
+                <div class="details-box ads-details-wrapper">
+                    <div id="owl-demo" class="owl-carousel owl-theme">
+                        {% for image_url in product.image_url.split(',') %}
+                        <div class="item">
+                            <div class="product-img">
+                                <img class="img-fluid" src="{{ image_url }}" alt="{{ product.title }}">
+                            </div>
+                            <span class="price">${{ product.price }}</span>
+                        </div>
+                        {% endfor %}
+                        <!-- Puedes añadir más imágenes aquí si tienes varias -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 col-xs-12">
+                <div class="details-box">
+                    <div class="ads-details-info">
+                        <h2>{{ product.title }}</h2>
+                        <p class="mb-2">{{ product.description }}</p>
+                        <div class="details-meta">
+                            <span><a href="#"><i class="lni lni-alarm-clock"></i> {{ product.created_at.strftime('%d %b,
+                                    %I:%M %p') }}</a></span>
+                            <span><a href="#"><i class="lni lni-map-marker"></i> {{ product.location }}</a></span>
+                            <span><a href="#"><i class="lni lni-eye"></i> {{ product.views }} Views</a></span>
+                        </div>
+                        <h4 class="title-small mb-3">Specification:</h4>
+                        <ul class="list-specification">
+                            {% for spec in product.specifications %}
+                            <li><i class="lni lni-checkmark-circle"></i> {{ spec }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <ul class="advertisement mb-4">
+                        <li>
+                            <p><strong>Type:</strong> <a href="#">{{ product.type }}</a>, <a href="#">{{
+                                    product.for_sale }}</a></p>
+                        </li>
+                        <li>
+                            <p><strong>Condition:</strong> {{ product.condition }}</p>
+                        </li>
+                        <li>
+                            <p><strong>Brand:</strong> <a href="#">{{ product.brand }}</a></p>
+                        </li>
+                    </ul>
+                    <div class="ads-btn mb-4">
+                        <a href="mailto:{{ product.owner.email }}" class="btn btn-common btn-reply"><i
+                                class="lni lni-envelope"></i> Email</a>
+                        <a href="tel:{{ product.owner.phone }}" class="btn btn-common"><i
+                                class="lni lni-phone-handset"></i> {{ product.owner.phone }}</a>
+                    </div>
+                    <div class="share">
+                        <span>Share: </span>
+                        <div class="social-link">
+                            <a class="facebook" href="#"><i class="lni lni-facebook-filled"></i></a>
+                            <a class="twitter" href="#"><i class="lni lni-twitter-filled"></i></a>
+                            <a class="linkedin" href="#"><i class="lni lni-linkedin-fill"></i></a>
+                            <a class="google" href="#"><i class="lni lni-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Info End -->
+
+        <!-- Product Description Start -->
+        <div class="description-info">
+            <div class="row">
+                <div class="col-lg-8 col-md-6 col-xs-12">
+                    <div class="description">
+                        <h4>Description</h4>
+                        <p>{{ product.full_description }}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="short-info">
+                        <h4>Short Info</h4>
+                        <ul>
+                            <li><a href="#"><i class="lni lni-users"></i> More ads by <span>{{ product.owner.name
+                                        }}</span></a></li>
+                            <li><a href="#"><i class="lni lni-printer"></i> Print this ad</a></li>
+                            <li><a href="#"><i class="lni lni-reply"></i> Send to a friend</a></li>
+                            <li><a href="#"><i class="lni lni-warning"></i> Report this ad</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Description End -->
+    </div>
+</div>
+<!-- Ads Details End -->
+
+{% endblock %}

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Area Start -->
+<div id="hero-area">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12 text-center">
+                <div class="contents">
+                    <h1 class="head-title">Welcome to <span class="year">ClassiAlly</span></h1>
+                    <p>Buy And Sell Everything From Used Cars To Mobile Phones And Computers, <br> Or Search For
+                        Property, Jobs And More</p>
+                    <div class="search-bar">
+                        <fieldset>
+                            <form class="search-form">
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-tag"></i>
+                                    <input type="text" name="customword" class="form-control"
+                                        placeholder="What are you looking for">
+                                </div>
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-map-marker"></i>
+                                    <div class="tg-select">
+                                        <select name="country">
+                                            <option value="None">Select Country</option>
+                                            <option value="austria">Austria</option>
+                                            <option value="france">France</option>
+                                            <option value="germany">Germany</option>
+                                            <option value="italy">Italy</option>
+                                            <option value="spain">Spain</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group tg-inputwithicon">
+                                    <i class="lni lni-layers"></i>
+                                    <div class="tg-select">
+                                        <select>
+                                            <option value="none">Select Categories</option>
+                                            <option value="mobiles">Mobiles</option>
+                                            <option value="electronics">Electronics</option>
+                                            <option value="real estate">Real Estate</option>
+                                            <option value="vehicles">Vehicles</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-common" type="button"><i class="lni lni-search"></i></button>
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+<!-- Trending Categories Section Start -->
+<section class="trending-cat section-padding">
+    <div class="container">
+        <h1 class="section-title">Product Categories</h1>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <a href="/ad/category?category=vehicles">
+                    <div class="box">
+                        <div class="icon">
+                            <img class="img-fluid" src="/assets/img/category/img-1.png" alt="">
+                        </div>
+                        <h4>Vehicle</h4>
+                        <strong>{{ categories_counts.vehicles }}</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <a href="/ad/category?category=real estate">
+                    <div class="box">
+                        <div class="icon">
+                            <img class="img-fluid" src="/assets/img/category/img-2.png" alt="">
+                        </div>
+                        <h4>Real Estate</h4>
+                        <strong>{{ categories_counts.real_estate}}</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <a href="/ad/category?category=mobiles">
+                    <div class="box">
+                        <div class="icon">
+                            <img class="img-fluid" src="/assets/img/category/img-3.png" alt="">
+                        </div>
+                        <h4>Mobiles</h4>
+                        <strong>{{ categories_counts.mobiles }}</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <a href="/ad/category?category=electronics">
+                    <div class="box">
+                        <div class="icon">
+                            <img class="img-fluid" src="/assets/img/category/img-4.png" alt="">
+                        </div>
+                        <h4>Electronics</h4>
+                        <strong>{{ categories_counts.electronics }}</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Trending Categories Section End -->
+
+<!-- Featured Section Start -->
+<section class="featured section-padding">
+    <div class="container">
+        <h1 class="section-title">Latest Products</h1>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class="featured-box">
+                    <figure>
+                        <div class="icon">
+                            <i class="lni lni-heart"></i>
+                        </div>
+                        <a href="{{ url_for('ads_details', product_id=product.id) }}"><img class="img-fluid"
+                                src="{{ product.image_url.split(',')[0] or '/assets/img/no-image.png' }}" alt=""></a>
+
+                    </figure>
+                    <div class="feature-content">
+                        <div class="tg-product">
+                            <a href="#">{{ product.category }}</a>
+                        </div>
+                        <h4><a href="ads-details/{{ product.id }}">{{ product.title }}</a></h4>
+                        <span>Last Updated: {{ product.created_at.strftime('%d %b, %I:%M %p') }}</span>
+                        <ul class="address">
+                            <li>
+                                <a href=""><i class="lni lni-map-marker"></i> {{ product.owner.country }}</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="lni lni-alarm-clock"></i> {{ product.created_at.strftime('%d %b,
+                                    %I:%M %p') }}</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="lni lni-user"></i> {{ product.owner.firstname }} {{
+                                    product.owner.lastname }}</a>
+                            </li>
+                        </ul>
+                        <div class="btn-list">
+                            <a class="btn-price" href="#">$ {{ product.price }}</a>
+                            <a class="btn btn-common" href="/ad/product/{{ product.id }}">
+                                <i class="lni lni-list"></i>
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Featured Section End -->
+<!-- Counter Area Start -->
+<section class="counter-section section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Counter Item -->
+            <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                <div class="counter">
+                    <div class="icon"><i class="lni lni-layers"></i></div>
+                    <div class="counterUp">{{ ads }}</div>
+                    <p>Ads Posted</p>
+                </div>
+            </div>
+            <!-- Counter Item -->
+            <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                <div class="counter">
+                    <div class="icon"><i class="lni lni-map"></i></div>
+                    <div class="counterUp">{{ locations }}</div>
+                    <p>Locations</p>
+                </div>
+            </div>
+            <!-- Counter Item -->
+            <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                <div class="counter">
+                    <div class="icon"><i class="lni lni-user"></i></div>
+                    <div class="counterUp">{{ users }}</div>
+                    <p>Members</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Counter Area End -->
+<!-- Testimonial Section Start -->
+<section class="testimonial section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div id="testimonials" class="owl-carousel">
+                    <div class="item">
+                        <div class="testimonial-item">
+                            <div class="content">
+                                <h2><a href="#">John Doe</a></h2>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Explicabo quidem, excepturi facere magnam illum, at accusantium doloremque odio.</p>
+                                <h3>Developer at <a href="#">xyz company</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-item">
+                            <div class="content">
+                                <h2><a href="#">Jessica</a></h2>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Explicabo quidem, excepturi facere magnam illum, at accusantium doloremque odio.</p>
+                                <h3>Developer at <a href="#">xyz company</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-item">
+                            <div class="content">
+                                <h2><a href="#">David</a></h2>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Explicabo quidem, excepturi facere magnam illum, at accusantium doloremque odio.</p>
+                                <h3>Developer at <a href="#">xyz company</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonial Section End -->
+{% endblock %}
