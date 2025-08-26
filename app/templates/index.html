@@ -121,7 +121,7 @@
                             <i class="lni lni-heart"></i>
                         </div>
                         <a href="{{ url_for('ads_details', product_id=product.id) }}"><img class="img-fluid"
-                                src="{{ product.image_url.split(',')[0] or '/assets/img/no-image.png' }}" alt=""></a>
+                                src="{{ (product.image_url or '/assets/img/uploads/no-image.png').split(',')[0] }}" alt=""></a> 
 
                     </figure>
                     <div class="feature-content">

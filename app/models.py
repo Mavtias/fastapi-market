@@ -24,6 +24,7 @@ class User(Base):
     hashed_password = Column(String, nullable = False)
     is_active = Column(Boolean, default = True)
     created_at = Column(DateTime(timezone=True), server_default = func.now(), nullable = True)
+    is_fake = Column(Boolean, default=False)
 
     products = relationship("Product", back_populates="owner")
 
@@ -40,6 +41,7 @@ class Product(Base):
     image_url = Column(String, nullable = True)
     created_at = Column(DateTime(timezone=True), server_default = func.now(), nullable = True)
     owner_id = Column(Integer, ForeignKey("users.id", ondelete = "CASCADE"))
+    is_fake = Column(Boolean, default=False)
 
 
 
